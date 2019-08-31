@@ -84,7 +84,7 @@ if mfcc == -1 or chrom == -1:
     exit()
 
 ## concatenate mfcc and chrom features
-att_input = [np.hstack([m, c]) for m, c in zip(mfcc, chrom)]
+attr_input = [np.hstack([m, c]) for m, c in zip(mfcc, chrom)]
 
 ## checking the final length
 #print(len(mfcc[5]), len(chrom[5]), len(x[5]))
@@ -92,7 +92,7 @@ att_input = [np.hstack([m, c]) for m, c in zip(mfcc, chrom)]
 
 ##detect targets from sound names
 p = re.compile('^[aeou]|[bcdfghjklmnpqrstwxyz]+(?=[aeiou])')
-target = [p.match(f).group() for f in audio_files]
+target_input = [p.match(f).group() for f in audio_files]
 
 ##for debugging
 # for i in range(len(audio_files)):
@@ -105,16 +105,24 @@ target = [p.match(f).group() for f in audio_files]
 #print(audio_files)
 
 
-## tag labels to attributes. Return 2-d array.
-labeled_input = np.array([np.hstack([i, l]) for i, l in zip(att_input, target)])
+# ## tag labels to attributes. Return 2-d array.
+# labeled_input = np.array([np.hstack([i, l]) for i, l in zip(att_input, target)])
 
 
 os.chdir(cwd)
-export_name = 'processed_audio_' + datetime.now().strftime('%H_%M_%S') + '.csv'
-with open(export_name,"w+") as processed:
+this_time = datetime.now().strftime('%H_%M_%S')
+attr_export_name = 'attr_in_' + this_time + '.csv'
+target_export_name = 'target_in_' + this_time + '.csv'
+
+with open(attr_export_name,"w+") as processed:
     csvWriter = csv.writer(processed,delimiter=',')
-    csvWriter.writerows(labeled_input)
+    csvWriter.writerows(attr_input)
+
+with open(target_export_name,"w+") as processed:
+    csvWriter = csv.writer(processed,delimiter=',')
+    csvWriter.writerows(target_input)
 
 ## check final lengths
 #print(len(att_input[3]), len(labeled_input[3]), labeled_input)
-print('processed input is saved at ', export_name)
+print('Attribute data saved as ', attr_export_name)
+print('Target data saved as ', target_export_name)
