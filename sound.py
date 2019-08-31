@@ -2,6 +2,7 @@
 import librosa
 import numpy as np
 import os, re, csv
+from datetime import datetime
 
 global hop_length
 
@@ -41,7 +42,7 @@ def getChroma(audio_file):
                                             sr=sr).flatten()
 
 
-## return a 2-d array of MFCC padded with 0's of ALL audio files
+## return a list of 1-d array of MFCC padded with 0's of ALL audio files
 def getPaddedMFCC(audio_files):
     result = [getMFCC(f) for f in audio_files]
 
@@ -57,7 +58,7 @@ def getPaddedMFCC(audio_files):
     else:
         return padded
 
-## return a 2-d array of chromagram padded with 0's of ALL audio files
+## return a list of 1-d array of chromagram padded with 0's of ALL audio files
 def getPaddedChroma(audio_files):
     result = [getChroma(f) for f in audio_files]
 
@@ -90,7 +91,7 @@ att_input = [np.hstack([m, c]) for m, c in zip(mfcc, chrom)]
 
 
 ##detect targets from sound names
-p = re.compile('^[aeoU]|[bcdfghjklmnpqrstwxyz]+(?=[aeiou])')
+p = re.compile('^[aeou]|[bcdfghjklmnpqrstwxyz]+(?=[aeiou])')
 target = [p.match(f).group() for f in audio_files]
 
 ##for debugging
@@ -104,11 +105,8 @@ target = [p.match(f).group() for f in audio_files]
 #print(audio_files)
 
 
-## tag labels to attributes
+## tag labels to attributes. Return 2-d array.
 labeled_input = np.array([np.hstack([i, l]) for i, l in zip(att_input, target)])
-
-
-from datetime import datetime
 
 
 os.chdir(cwd)
