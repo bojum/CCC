@@ -1,9 +1,7 @@
 ## extracts features from audio files and converts into numpy
 import librosa
 import numpy as np
-import os
-import re
-import csv
+import os, re, csv
 
 global hop_length
 
@@ -49,7 +47,7 @@ def getPaddedMFCC(audio_files):
 
     ##pad arrays with 0's. Get arrays of size Max
     max_len = max([len(x) for x in result])
-    padded = [np.pad(x, (0, max_len - len(x))) for x in result]
+    padded = [np.pad(x, (0, max_len - len(x)), mode = 'constant') for x in result]
 
     ##sanity check
     is_shorter = sum([len(x) - max_len for x in padded])
@@ -65,7 +63,7 @@ def getPaddedChroma(audio_files):
 
     ##pad arrays with 0's. Get arrays of size Max
     max_len = max([len(x) for x in result])
-    padded = [np.pad(x, (0, max_len - len(x))) for x in result]
+    padded = [np.pad(x, (0, max_len - len(x)), mode = 'constant') for x in result]
 
     ##sanity check
     is_shorter = sum([len(x) - max_len for x in padded])
