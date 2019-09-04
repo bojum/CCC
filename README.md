@@ -1,2 +1,2 @@
 # PyHack2019
-Pytorch to identify 'x', 'q', and 'c' sounds
+Pytorch to identify 's', 'x', and others.
