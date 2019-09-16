@@ -1,4 +1,4 @@
-# CCC (Chinese Consonant Classification)
+# CCC (Chinese Consonant Classifier)
 The program determines the closest Chinese consonant to what user speaker. This will help user knows if their pronunciation is off to how a native will say.
 
 The code is implemented in Jupyter Notebook.
@@ -19,8 +19,9 @@ Processed audio file that is ready to be fed into the model. It is in the same o
 Labels of each audio file used for training/validating. It is in the same order as in *_attr_in.csv.
 
 ## How to Run the Application 
-1. Clone the repository to your local machine (make sure you clone CNN-mfcc-9 branch)
-2. Open jupyter notebook 'record_sound.ipynb' -> click run all <br/>
-        this will give you 3 seconds to prepare and 1.25 seconds for you to speak. Your input sound will be saved to '/temp' directory
+1. Clone the repository to your local machine (make sure you clone CNN-mfcc-9 branch). There are two importance directory in the clone. The first one is temp/ which is where your record will be saved. The other one is model8/ which is where .pt file of trained data lives in.
+
+2. Open jupyter notebook 'record_sound.ipynb' -> click run all <br/> When you run it, one of the code chunks will indicate that you'll have 3 seconds before the record begins. Then, you'll have 1.25 seconds to record your voice. The audio file will be automatically saved in temp/. You can listen to your record on the later code chunk. The wave plot is also provided.
+
 3. Open jupyter notebook 'model_CNN_classify.ipynb' -> click run all <br/> 
-        The result will be printed on the last line "It thinks you said: your classified sound"
+        This notebook will laod the trained model into the current network and feed you record saved ealier into the model. On the last line is a Chinese consonant the model thinks it is closest to your record. It says: "It thinks you said: your classified sound"
