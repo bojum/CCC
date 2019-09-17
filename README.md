@@ -1,3 +1,5 @@
+[Please see CNN-mfcc-9 branch]
+
 # CCC (Chinese Consonant Classifier)
 The program determines the closest Chinese consonant to what the user speaks. The classification results will help improve the pronunciation so that they can pronounce as close to native speakers as possible. 
 
