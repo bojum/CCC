@@ -3,6 +3,16 @@ The program determines the closest Chinese consonant to what the user speaks. Th
 
 The code is implemented in Jupyter Notebook.
 
+## Required Libraries
+
+You'll need the following libraries to run the code.
+
+1. librosa
+2. torch
+3. numpy
+4. pickle
+5. sounddevice
+
 ## How to Run
 
 1. Clone the repository to your local machine (make sure you clone CNN-mfcc-9 branch).
